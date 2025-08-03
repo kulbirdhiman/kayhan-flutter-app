@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kayhan_app/screens/cart_screen.dart';
+import 'package:kayhan_app/screens/favorites_sceen.dart';
 import 'package:kayhan_app/widgets/auth/login_page.dart';
 import 'screens/home_screem.dart';
 import 'widgets/layout/bottom_nav_bar.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vehicle UI App',
+      title: 'kayhan Audio',
       debugShowCheckedModeBanner: false,
       home: const MainPage(),
     );
@@ -35,7 +36,7 @@ class _MainPageState extends State<MainPage> {
     HomePage(),
     Placeholder(),
     CartScreen(), // replace with SettingsPage()
-    Placeholder(),
+    TodoListPage(),
     LoginPage(),
      // replace with ProfilePage()
   ];
