@@ -1,66 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kayhan_app/screens/cart_screen.dart';
+// import 'package:provider/provider.dart'; 
+import '../providers/auth_controller.dart'; 
 
-// Import your screens
 import '../screens/home_screen.dart';
 import '../screens/auth/login_screen.dart';
 import "../screens/auth/register_screen.dart";
 import '../screens/search_screen.dart';
-import '../screens/products/product_detail_screen.dart'; // <-- add product detail screen
+import '../screens/users/profile_screen.dart';
+import '../screens/cart_screen.dart';
+import '../screens/products/product_detail_screen.dart';
 
-final GoRouter router = GoRouter(
-  routes: [
-    /// ShellRoute keeps BottomNav persistent
-    ShellRoute(
-      builder: (context, state, child) {
-        return Scaffold(
-          body: child,
-          bottomNavigationBar: const BottomNavBar(),
-        );
-      },
-      routes: [
-        GoRoute(
-          path: '/',
-          name: 'home',
-          builder: (context, state) => const HomeScreen(),
-        ),
-        GoRoute(
-          path: '/search',
-          name: 'search',
-          builder: (context, state) => const ProductSearchPage(),
-        ),
-        GoRoute(
-          path: '/cart',
-          name: 'cart',
-          builder: (context, state) => const CartPage(),
-        ),
+GoRouter createRouter(AuthController auth) {
+  return GoRouter(
+    refreshListenable: auth, // 👈 listens to login/logout
+    redirect: (context, state) {
+      final loggedIn = auth.isLoggedIn;
 
-        // ✅ NEW: Product Detail Page route
-        GoRoute(
-          path: '/product/:id',
-          name: 'productDetail',
-          builder: (context, state) {
-            final productId = state.pathParameters['id']!;
-            return ProductDetailPage(productId: productId);
-          },
-        ),
-      ],
-    ),
+      // If logged in and trying to go to login/register → send to home
+      if (loggedIn &&
+          (state.fullPath == '/login' || state.fullPath == '/register')) {
+        return '/profile';
+      }
 
-    // Auth routes (without BottomNav)
-    GoRoute(
-      path: '/login',
-      name: 'login',
-      builder: (context, state) => const LoginScreen(),
-    ),
-    GoRoute(
-      path: '/register',
-      name: 'register',
-      builder: (context, state) => const SignUpScreen(),
-    ),
-  ],
-);
+      // If not logged in and trying to access profile/cart → send to login
+      if (!loggedIn &&
+          (state.fullPath == '/profile' || state.fullPath == '/cart')) {
+        return '/login';
+      }
+
+      return null;
+    },
+    routes: [
+      ShellRoute(
+        builder: (context, state, child) {
+          return Scaffold(
+            body: child,
+            bottomNavigationBar: const BottomNavBar(),
+          );
+        },
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (context, state) => const HomeScreen(),
+          ),
+          GoRoute(
+            path: '/search',
+            builder: (context, state) => const ProductSearchPage(),
+          ),
+          GoRoute(
+            path: '/cart',
+            builder: (context, state) => const CartPage(),
+          ),
+          GoRoute(
+            path: '/product/:id',
+            builder: (context, state) {
+              final productId = state.pathParameters['id']!;
+              return ProductDetailPage(productId: productId);
+            },
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: '/register',
+        builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfileScreen(),
+      ),
+    ],
+  );
+}
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});
@@ -72,8 +87,7 @@ class BottomNavBar extends StatelessWidget {
     int currentIndex = 0;
     if (location.startsWith('/search')) currentIndex = 1;
     else if (location.startsWith('/cart')) currentIndex = 2;
-    else if (location.startsWith('/support')) currentIndex = 3;
-    else if (location.startsWith('/profile')) currentIndex = 4;
+    else if (location.startsWith('/profile')) currentIndex = 3;
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
@@ -94,10 +108,7 @@ class BottomNavBar extends StatelessWidget {
             context.go('/cart');
             break;
           case 3:
-            context.go('/login');
-            break;
-          case 4:
-            context.go('/login');
+            context.go('/profile'); // Profile page when logged in
             break;
         }
       },
@@ -105,7 +116,6 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
         BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "My Cart"),
-        // BottomNavigationBarItem(icon: Icon(Icons.support_agent), label: "Support"),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
       ],
     );
