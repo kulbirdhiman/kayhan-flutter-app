@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import '../../services/auth_service.dart'; // import service
+import '../../providers/auth_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,21 +23,20 @@ class _LoginScreenState extends State<LoginScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
+      final token = response.data["data"]["token"];
 
-      // Example: backend sends token
-      final token = response.data["token"];
-      print("Login success: $token");
+      // ✅ Save token in AuthController
+      await context.read<AuthController>().login(token);
 
-      // Navigate to home
-      if (mounted) {
-        context.go('/');
-      }
+      if (!mounted) return;
+      context.go('/'); // navigate to home
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(SnackBar(content: Text("Login failed: $e")));
     } finally {
-      setState(() => _loading = false);
+      if (mounted) setState(() => _loading = false);
     }
   }
 
