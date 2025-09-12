@@ -1,13 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 import 'utils/routes.dart';
 import 'providers/auth_controller.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final authController = AuthController();
-  await authController.init(); // load token / user data
+  await authController.init();
+// await Firebase.initializeApp(
+//   options: defa
+// )
+  // Initialize OneSignal
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("e499e747-b75d-4316-acc3-fdbb9517d58e"); // Replace with your OneSignal App ID
+  OneSignal.Notifications.requestPermission(true);
+
+  // Handle notification opened
+  OneSignal.Notifications.addClickListener((event) {
+    print("Notification clicked: ${event.notification.jsonRepresentation()}");
+    // You can navigate to specific screen here
+  });
 
   runApp(
     ChangeNotifierProvider.value(
@@ -22,7 +38,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final auth = context.watch<AuthController>(); 
+    final auth = context.watch<AuthController>();
     final router = createRouter(auth);
 
     return MaterialApp.router(
@@ -35,4 +51,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
