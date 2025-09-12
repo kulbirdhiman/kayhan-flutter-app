@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                   const CircleAvatar(
                     radius: 50,
                     backgroundImage: NetworkImage(
-                      "https://instagram.faip1-1.fna.fbcdn.net/v/t51.2885-19/516870165_17885626686320912_513015394501977709_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.faip1-1.fna.fbcdn.net&_nc_cat=108&_nc_oc=Q6cZ2QFfONU0rFXgnAKarNvxyJreBhTBPy7eo-4m7X3VyvnFO3UdN7mQ-wps65L6ZGnYTRs&_nc_ohc=IgNkmLrH7E0Q7kNvwGjDP7I&_nc_gid=2GeobMswlNnDaiqvtCFXGg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AfUE4z5MDwL4KzhalFileLZOoUmFTEeamRVdxyduVrHx7w&oe=68B1FA02&_nc_sid=7a9f4b", // demo user avatar
+                      "https://cdn.vectorstock.com/i/preview-1x/78/42/person-gray-photo-placeholder-man-vector-23907842.jpg", // demo user avatar
                     ),
                   ),
                   const SizedBox(height: 15),
@@ -68,7 +68,7 @@ class ProfileScreen extends StatelessWidget {
             buildOptionTile(Icons.edit, "Edit Profile"),
             // buildOptionTile(Icons.card_giftcard, "Apply Voucher"),
             buildOptionTile(Icons.support_agent, "Support"),
-            buildOptionTile(Icons.settings, "Profile Settings"),
+            buildOptionTile(Icons.settings, "Replace & Return"),
             // buildOptionTile(Icons.language, "Language"),
             buildOptionTile(Icons.money_off_csred_sharp, "Orders"),
 
