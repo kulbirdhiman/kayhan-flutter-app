@@ -1,0 +1,27 @@
+# Build output & tooling caches
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+
+# Native platforms aren't needed for the web image
+android/
+ios/
+macos/
+linux/
+windows/
+
+# VCS / editor / OS
+.git/
+.github/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore

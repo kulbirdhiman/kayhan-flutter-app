@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    image: kayhan-app:latest
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      API_UPSTREAM: ${API_UPSTREAM:-https://api.kayhanaudio.com.au}
+      CDN_UPSTREAM: ${CDN_UPSTREAM:-https://d198m4c88a0fux.cloudfront.net}
+    restart: unless-stopped
