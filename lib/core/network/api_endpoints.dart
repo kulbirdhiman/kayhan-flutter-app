@@ -27,4 +27,9 @@ class ApiEndpoints {
 
   // Vehicles
   static String carModelYears(int modelId) => '/v1/car_model/detail/$modelId';
+
+  // Garage
+  static const garageVehicles = '/v1/garage/vehicles';
+  static String garageVehicleSelect(int id) => '/v1/garage/vehicles/$id/select';
+  static String garageVehicleDelete(int id) => '/v1/garage/vehicles/$id';
 }

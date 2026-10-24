@@ -13,6 +13,7 @@ import '../features/home/presentation/home_controller.dart';
 import '../features/orders/data/order_repository.dart';
 import '../features/orders/presentation/orders_controller.dart';
 import '../features/vehicle/data/vehicle_repository.dart';
+import '../features/vehicle/data/garage_repository.dart';
 import '../features/vehicle/presentation/garage_controller.dart';
 import '../features/wishlist/presentation/wishlist_controller.dart';
 
@@ -36,6 +37,7 @@ class AppDependencies {
 
   List<SingleChildWidget> get providers {
     final catalog = CatalogRepository(api);
+    final garageRepository = GarageRepository(api);
     return [
       Provider.value(value: storage),
       Provider.value(value: catalog),
@@ -46,7 +48,7 @@ class AppDependencies {
       ChangeNotifierProvider(create: (_) => HomeController(catalog)),
       ChangeNotifierProvider(create: (_) => CartController(storage)),
       ChangeNotifierProvider(create: (_) => WishlistController(storage)),
-      ChangeNotifierProvider(create: (_) => GarageController(storage)),
+      ChangeNotifierProvider(create: (_) => GarageController(storage, garageRepository, auth)),
       ChangeNotifierProvider(create: (_) => AddressController(storage)),
       ChangeNotifierProvider(create: (_) => OrdersController(LocalOrderRepository(storage))),
     ];

@@ -39,6 +39,11 @@ class ApiClient {
   Future<dynamic> post(String path, {Object? body}) =>
       _send(() => _dio.post(path, data: body));
 
+  Future<dynamic> patch(String path, {Object? body}) =>
+      _send(() => _dio.patch(path, data: body));
+
+  Future<dynamic> delete(String path) => _send(() => _dio.delete(path));
+
   /// Returns the `data` field of the response envelope.
   Future<dynamic> _send(Future<Response> Function() request) async {
     try {
