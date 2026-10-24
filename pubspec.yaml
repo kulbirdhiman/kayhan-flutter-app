@@ -24,8 +24,6 @@ dependencies:
 
   # Push notifications
   onesignal_flutter: ^5.3.4
-  firebase_core: ^3.4.0
-  firebase_messaging: ^15.0.3
 
 dev_dependencies:
   flutter_test:
