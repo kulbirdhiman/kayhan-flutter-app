@@ -81,7 +81,7 @@ class _ActiveVehicleCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: AppRadius.large,
         gradient: const LinearGradient(
-          colors: [AppColors.ink, Color(0xFF13324D)],
+          colors: [AppColors.ink, AppColors.brandDeep],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -105,7 +105,7 @@ class _ActiveVehicleCard extends StatelessWidget {
           FilledButton.icon(
             style: FilledButton.styleFrom(
               backgroundColor: AppColors.primaryBright,
-              foregroundColor: AppColors.ink,
+              foregroundColor: Colors.white,
             ),
             onPressed: () => context.push(
               AppRoutes.productList(title: vehicle.label, query: vehicle.searchQuery),

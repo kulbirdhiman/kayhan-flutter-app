@@ -33,7 +33,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
       'Upgrade your factory screen',
       'Shop CarPlay',
       Icons.phone_iphone_rounded,
-      const [AppColors.ink, Color(0xFF0F3B5F)],
+      const [AppColors.ink, AppColors.brandDeep],
       AppRoutes.productList(title: 'CarPlay modules', query: 'CarPlay'),
     ),
     _Promo(
@@ -41,7 +41,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
       'Stereo + camera bundles',
       'View bundles',
       Icons.local_offer_rounded,
-      const [Color(0xFF4A0D1E), Color(0xFF9F1239)],
+      const [AppColors.brandDeep, AppColors.primary],
       AppRoutes.productList(title: 'Combo deals', query: 'Combo'),
     ),
     _Promo(
@@ -49,7 +49,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
       'Amplifiers, subs & speakers',
       'Shop audio',
       Icons.speaker_rounded,
-      const [Color(0xFF1E1B4B), Color(0xFF4338CA)],
+      const [AppColors.ink, AppColors.brandDeep],
       AppRoutes.productList(title: 'Car audio', query: 'Audio'),
     ),
   ];
@@ -121,7 +121,7 @@ class _PromoCarouselState extends State<PromoCarousel> {
                                 Text(
                                   p.eyebrow,
                                   style: theme.textTheme.labelSmall?.copyWith(
-                                    color: AppColors.primaryBright,
+                                    color: Colors.white,
                                     letterSpacing: 1.2,
                                     fontWeight: FontWeight.w800,
                                   ),

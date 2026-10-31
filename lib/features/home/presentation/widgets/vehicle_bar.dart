@@ -17,7 +17,7 @@ class VehicleBar extends StatelessWidget {
     final vehicle = context.watch<GarageController>().selected;
 
     return Material(
-      color: AppColors.ink,
+      color: theme.colorScheme.surface,
       borderRadius: AppRadius.medium,
       child: InkWell(
         borderRadius: AppRadius.medium,
@@ -36,13 +36,13 @@ class VehicleBar extends StatelessWidget {
                   children: [
                     Text(
                       vehicle == null ? 'Shop by vehicle' : 'Parts for your car',
-                      style: theme.textTheme.labelSmall?.copyWith(color: Colors.white60),
+                      style: theme.textTheme.labelSmall?.copyWith(color: AppColors.primary),
                     ),
                     Text(
                       vehicle?.label ?? 'Add your car to find parts that fit',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleSmall?.copyWith(color: Colors.white),
+                      style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.onSurface),
                     ),
                   ],
                 ),

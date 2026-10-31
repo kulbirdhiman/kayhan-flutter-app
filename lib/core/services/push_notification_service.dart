@@ -3,13 +3,16 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import '../config/app_config.dart';
 
-/// OneSignal setup. OneSignal has no web SDK binding in Flutter, so it is
-/// skipped on web (including the Docker build).
+/// OneSignal setup for the supported Android and iOS platforms.
 class PushNotificationService {
   PushNotificationService._();
 
   static void init({void Function(String? route)? onOpen}) {
-    if (kIsWeb) return;
+    if (kIsWeb ||
+        (defaultTargetPlatform != TargetPlatform.android &&
+            defaultTargetPlatform != TargetPlatform.iOS)) {
+      return;
+    }
     try {
       if (kDebugMode) OneSignal.Debug.setLogLevel(OSLogLevel.warn);
       OneSignal.initialize(AppConfig.oneSignalAppId);
