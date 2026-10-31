@@ -5,7 +5,7 @@ import '../storage/local_storage.dart';
 class ThemeController extends ChangeNotifier {
   ThemeController(this._storage) {
     final saved = _storage.getString(LocalStorage.themeMode);
-    _mode = ThemeMode.values.firstWhere((m) => m.name == saved, orElse: () => ThemeMode.system);
+    _mode = ThemeMode.values.firstWhere((m) => m.name == saved, orElse: () => ThemeMode.light);
   }
 
   final LocalStorage _storage;

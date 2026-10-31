@@ -186,7 +186,7 @@ class _GuestHeader extends StatelessWidget {
             children: [
               Expanded(
                 child: FilledButton(
-                  style: FilledButton.styleFrom(backgroundColor: AppColors.primaryBright, foregroundColor: AppColors.ink),
+                  style: FilledButton.styleFrom(backgroundColor: AppColors.primaryBright, foregroundColor: Colors.white),
                   onPressed: () => context.push(AppRoutes.login),
                   child: const Text('Sign in'),
                 ),

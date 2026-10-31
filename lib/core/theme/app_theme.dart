@@ -15,15 +15,24 @@ class AppTheme {
     final surface = isDark ? AppColors.darkSurface : AppColors.lightSurface;
     final border = isDark ? AppColors.darkBorder : AppColors.lightBorder;
     final muted = isDark ? AppColors.darkMuted : AppColors.lightMuted;
-    final onSurface = isDark ? const Color(0xFFF2F4F7) : AppColors.ink;
+    final onSurface = isDark ? const Color(0xFFF5EFE7) : AppColors.ink;
 
     final scheme = ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: brightness,
     ).copyWith(
       primary: isDark ? AppColors.primaryBright : AppColors.primary,
-      onPrimary: isDark ? AppColors.ink : Colors.white,
-      secondary: AppColors.primaryBright,
+      onPrimary: Colors.white,
+      primaryContainer: isDark ? AppColors.darkPrimaryContainer : AppColors.primaryContainer,
+      onPrimaryContainer: isDark ? AppColors.primaryContainer : AppColors.brandDeep,
+      secondary: isDark ? AppColors.primaryBright : AppColors.primary,
+      onSecondary: Colors.white,
+      secondaryContainer: isDark ? AppColors.darkPrimaryContainer : AppColors.primaryContainer,
+      onSecondaryContainer: isDark ? AppColors.primaryContainer : AppColors.brandDeep,
+      tertiary: isDark ? AppColors.primaryBright : AppColors.primary,
+      onTertiary: Colors.white,
+      tertiaryContainer: isDark ? AppColors.darkPrimaryContainer : AppColors.primaryContainer,
+      onTertiaryContainer: isDark ? AppColors.primaryContainer : AppColors.brandDeep,
       error: AppColors.sale,
       surface: surface,
       onSurface: onSurface,
@@ -31,9 +40,9 @@ class AppTheme {
       outline: border,
       outlineVariant: border,
       surfaceContainerLowest: background,
-      surfaceContainerLow: isDark ? const Color(0xFF12161C) : const Color(0xFFF9FAFB),
-      surfaceContainer: isDark ? const Color(0xFF1B2029) : const Color(0xFFF2F4F7),
-      surfaceContainerHigh: isDark ? const Color(0xFF222833) : const Color(0xFFEAECF0),
+      surfaceContainerLow: isDark ? const Color(0xFF1C1A18) : const Color(0xFFFAF6F0),
+      surfaceContainer: isDark ? const Color(0xFF2B2723) : const Color(0xFFF5EFE7),
+      surfaceContainerHigh: isDark ? const Color(0xFF342E28) : const Color(0xFFE7DED2),
     );
 
     final base = ThemeData(useMaterial3: true, colorScheme: scheme, brightness: brightness);
